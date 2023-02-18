@@ -42,7 +42,7 @@ trace('DURATION', 'You can trace the runtime of a task easily too:')
 timeEnd('Log every feature')
 ```
 
-<img src="output.png" height="200px" />
+<img src="output.png" height="400px" />
 
 <h3 align="center">CommonJS</h3>
 
