@@ -1,22 +1,9 @@
 import { jest } from '@jest/globals'
-import * as colors from 'kleur/colors'
-import { boldWhiteText, wrapInBrackets, log, time, timeEnd, error, warn, info, trace, debug } from '../dist/index.esm'
+import { log, time, timeEnd, error, warn, info, trace, debug } from '../dist/index.esm'
 
-describe('statusmessage', () => {
-  it('can call statusmessage', () => {
+describe('log', () => {
+  it('can call log', () => {
     expect(log).toBeDefined()
-  })
-})
-
-describe('boldWhiteText', () => {
-  it('should return the input string wrapped in bold and white colors', () => {
-    expect(boldWhiteText('test')).toEqual(colors.bold(colors.white('test')))
-  })
-})
-
-describe('wrapInBrackets', () => {
-  it('should wrap the input string in bold and white brackets', () => {
-    expect(wrapInBrackets('test')).toEqual(boldWhiteText(`[${'test'}]`))
   })
 })
 
