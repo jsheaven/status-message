@@ -15,10 +15,32 @@ export const debug = (tag?: string, ...args: Array<any>) =>
 export const trace = (tag?: string, ...args: Array<any>) =>
   console.trace(colors.white(colors.bgBlack(formatTag(tag))), ...args)
 
-export const formatTimeLabel = (label: string) => colors.bgBlack(colors.white(`⏰ ${label}`))
+export const formatTimeLabel = (label: string) => colors.bgBlack(colors.white(` ⏰ ${label} `))
 
 /** logs when timeEnd(...) will be called with the same arguments */
 export const time = (label: string) => console.time(formatTimeLabel(label))
 
 /** prints the log with the duration since time(...) was called with the same arguments */
 export const timeEnd = (label: string) => console.timeEnd(formatTimeLabel(label))
+
+export const clearPrevLine = () => {
+  process.stdout.moveCursor(0, -1)
+  process.stdout.clearLine(1)
+  process.stdout.cursorTo(0)
+}
+
+/** shows a spinning loading animation and returns a function to stop that again  */
+export const spinner = (label: string) => {
+  let i = 0
+  const spinner = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
+  const spinnerInterval = setInterval(() => {
+    clearPrevLine()
+    process.stdout.write(`${colors.bgCyan(` ${colors.white(colors.bold(spinner[i]))} `)} ${colors.white(label)}\n`)
+    i = (i + 1) % spinner.length
+  }, 100)
+
+  return () => {
+    clearInterval(spinnerInterval)
+    clearPrevLine()
+  }
+}

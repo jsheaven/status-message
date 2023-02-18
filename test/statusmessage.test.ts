@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals'
-import { log, time, timeEnd, error, warn, info, trace, debug } from '../dist/index.esm'
+import { log, time, timeEnd, error, warn, info, trace, debug, spinner } from '../dist/index.esm'
 
 describe('log', () => {
   it('can call log', () => {
@@ -92,4 +92,14 @@ describe('README use-case', () => {
   trace('DURATION', 'You can trace the runtime of a task easily too:')
 
   timeEnd('Log every feature')
+})
+
+describe('Show a console loading spinner', () => {
+  it('Can show a loading spinner', async () => {
+    const stop = spinner('Loading...')
+
+    await (async () => new Promise((resolve) => setTimeout(resolve, 2000)))()
+
+    stop()
+  })
 })

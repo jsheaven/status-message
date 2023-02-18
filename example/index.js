@@ -1,4 +1,4 @@
-import { log, error, warn, info, debug, trace, time, timeEnd } from '../dist/index.esm.js'
+import { log, error, warn, info, debug, trace, time, timeEnd, spinner, clearPrevLine } from '../dist/index.esm.js'
 
 time('Log every feature')
 
@@ -15,3 +15,17 @@ log()
 trace('DURATION', 'You can trace the runtime of a task easily too:')
 
 timeEnd('Log every feature')
+
+const stop = spinner('Loading...')
+
+await (async () => new Promise((resolve) => setTimeout(resolve, 2000)))()
+
+stop()
+
+let i = 1
+const countTo100 = setInterval(() => {
+  if (i > 1) clearPrevLine()
+  info('COUNT', i)
+  i++
+  if (i > 100) clearInterval(countTo100)
+}, 25)
